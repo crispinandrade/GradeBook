@@ -6,10 +6,12 @@ namespace GradeBook{
     public class Book {
         public Book(string name) {
             grades = new List<double>();
-            this.name = name;
+            Name = name;
         }
         public void AddGrade(double grade) {
-            grades.Add(grade);
+            if (grade <= 100 && grade >= 0){
+                grades.Add(grade);
+            }
         }
 
         public Statistics GetStatistics()
@@ -32,6 +34,6 @@ namespace GradeBook{
         }
 
         private List<double> grades;
-        private string name;        
+        public string Name;        
     }
 }
