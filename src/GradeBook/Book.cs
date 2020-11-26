@@ -8,9 +8,33 @@ namespace GradeBook{
             grades = new List<double>();
             Name = name;
         }
+
+        public void AddLetterGrade(char letter) {
+            switch (letter) {
+                case 'A': 
+                    AddGrade(85);
+                    break;
+                case 'B': 
+                    AddGrade(65);
+                    break;
+                case 'C': 
+                    AddGrade(50);
+                    break;
+                case 'D': 
+                    AddGrade(35);
+                    break;
+                case 'E': 
+                    AddGrade(0);
+                    break;
+            }
+        }
+
         public void AddGrade(double grade) {
             if (grade <= 100 && grade >= 0){
                 grades.Add(grade);
+            }
+            else {
+                throw new ArgumentException($"Please add a numbered {nameof(grade)}");
             }
         }
 
@@ -30,6 +54,24 @@ namespace GradeBook{
 
             result.Average /= grades.Count;
             
+            switch(result.Average) {
+                case var a when a >= 85.0:
+                    result.Letter = 'A';
+                    break;
+                case var a when a >= 75.0:
+                    result.Letter = 'B';
+                    break;
+                case var a when a >= 50.0:
+                    result.Letter = 'C';
+                    break;
+                case var a when a >= 35.0:
+                    result.Letter = 'D';
+                    break;
+                case var a when a <= 35.0:
+                    result.Letter = 'E';
+                    break;
+            }
+
             return result;
         }
 
