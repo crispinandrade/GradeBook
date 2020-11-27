@@ -5,6 +5,29 @@ namespace GradeBook.Tests
 {
     public class TypeTests
     {
+        public delegate string WriteLogDelegate(string logMessage);
+        int count = 0;
+
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            WriteLogDelegate log = ReturnMessage;
+
+            log += ReturnMessage;
+            log += IncrementCount;
+
+            var result = log("Hello!");
+            Assert.Equal("Hello!", result);
+            Assert.Equal(1, count);
+        }
+        string IncrementCount(string message) {
+            count++;
+            return message;
+        }
+        string ReturnMessage(string message) {
+            return message;
+        }
+
         // Integers
         [Fact]
         public void GetsInt()

@@ -9,6 +9,7 @@ namespace GradeBook
         {
             var book = new Book("Crispin");
             var input = "";
+            book.GradeAdded += OnGradeAdded;
 
             try {
                 while(true) {
@@ -26,7 +27,7 @@ namespace GradeBook
                 Console.WriteLine(e.Message);
             }
             finally {
-                Console.WriteLine("**")
+                Console.WriteLine("**");
             }
             
 
@@ -35,6 +36,10 @@ namespace GradeBook
             Console.WriteLine($"The high grade is {stats.High:n2}");
             Console.WriteLine($"The average grade is {stats.Average:n2}");
             Console.WriteLine($"The letter grade is {stats.Letter}");
+        }
+
+        static void OnGradeAdded(object sender, EventArgs e){
+            Console.WriteLine("Grade event added");
         }
     }
 }
